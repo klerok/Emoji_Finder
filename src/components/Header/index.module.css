@@ -1,0 +1,27 @@
+.header {
+  /* flow-root keeps the search bar's negative margin from collapsing out of the band */
+  display: flow-root;
+  background: linear-gradient(90deg, var(--header-from), var(--header-to));
+  padding: 42px 20px 0;
+  text-align: center;
+}
+
+.header_title {
+  font-size: 56px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--title);
+  margin: 0;
+
+  @media (max-width: 640px) {
+    font-size: 40px;
+  }
+}
+
+.header_subtitle {
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--subtitle);
+  margin: 10px 0 0;
+}

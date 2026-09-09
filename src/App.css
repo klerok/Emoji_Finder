@@ -1,0 +1,12 @@
+.app {
+  min-height: 100svh;
+  background: var(--page-bg);
+}
+
+.results {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 738px;
+  margin: 0 auto;
+  padding: 57px 20px 64px;
+}
