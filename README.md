@@ -1,7 +1,4 @@
 # Emoji Finder
-
-Search through 1820 emoji by name or keyword. Built with React, TypeScript and Vite.
-
 Click any card to copy the emoji to the clipboard.
 
 ## Scripts
