@@ -1,24 +1,46 @@
-import {useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import EmojiGrid from "./components/EmojiList/EmojiGrid";
-import emojiList from "./data/emojiList";
 import "./App.css";
-
+import type { Emoji } from "./types";
+import { getEmojis } from "./api/emojiApi";
 
 function App() {
-  const [query, setQuery] = useState("");
-  const search = query.trim().toLowerCase();
-  const results = emojiList.filter(
-    (e) =>
-      e.title.toLowerCase().includes(search) ||
-      e.keywords.some((k) => k.includes(search))
-  );
+  const [emojis, setEmojis] = useState<Emoji[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function fetchData() {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await getEmojis(searchTerm);
+      setEmojis(data);
+    } catch (error) {
+      setError("не удалось загрузить данные");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [searchTerm]);
+
+  if (error) {
+    return <div className="error">{error}</div>;
+  }
 
   return (
     <div className="app">
-      <Header query={query} onQueryChange={setQuery} />
+      <Header query={searchTerm} onQueryChange={setSearchTerm} />
       <main className="results">
-        <EmojiGrid emojis={results} query={query} />
+        {loading ? (
+          <p className="loading">Загрузка…</p>
+        ) : (
+          <EmojiGrid emojis={emojis} query={searchTerm} />
+        )}
       </main>
     </div>
   );

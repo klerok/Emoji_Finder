@@ -10,3 +10,15 @@
   margin: 0 auto;
   padding: 57px 20px 64px;
 }
+
+.error {
+  padding: 20px;
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+.loading {
+  padding: 20px;
+  text-align: center;
+}
